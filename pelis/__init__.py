@@ -10,18 +10,6 @@ with app.app_context():
 def hello():
     return 'Hello, World!'
 
-
-@app.route("/category")
-def category():
-   consulta = """
-       SELECT name FROM category
-       ORDER BY name;
-     """
-   con = db.get_db()
-   res = con.execute(consulta)
-   lista_category = res.fetchall()
-   pagina = render_template("category.html", categorias = lista_category)
-   return pagina
-
-from . import lenguaje
+from . import lenguaje,category
 app.register_blueprint(lenguaje.bp)
+app.register_blueprint(category.bp)
